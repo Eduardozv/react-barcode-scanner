@@ -1,42 +1,74 @@
 {
-  "name": "react-barcode-scanner/monorepo",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Monorepo for React Barcode Scanner",
-  "main": "index.js",
+  "name": "react-barcode-scanner",
+  "version": "2.0.2",
+  "description": "A barcode scanner base on Barcode Detector",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./lib/index.d.ts",
+        "default": "./lib/index.js"
+      }
+    },
+    "./polyfill": {
+      "import": {
+        "types": "./esm/polyfill.d.ts",
+        "default": "./esm/polyfill.js"
+      },
+      "require": {
+        "types": "./lib/polyfill.d.ts",
+        "default": "./lib/polyfill.js"
+      }
+    }
+  },
+  "types": "lib/index.d.ts",
+  "typings": "lib/index.d.ts",
   "scripts": {
-    "prepare": "husky install",
-    "docs:build": "pnpm --filter docs build",
-    "docs:dev": "pnpm --filter docs dev",
-    "build": "pnpm --filter react-barcode-scanner run build",
-    "ci:version": "pnpm changeset version && pnpm install --lockfile-only",
-    "ci:publish": "pnpm build && pnpm changeset publish"
+    "build:cjs": "tsc",
+    "build:es": "tsc -m esNext --outDir esm",
+    "build": "pnpm build:cjs && pnpm build:es"
   },
+  "keywords": [
+    "react",
+    "barcode detector",
+    "barcode-detector",
+    "barcode scanner",
+    "barcode-scanner",
+    "qrcode"
+  ],
   "author": "Ted Lin <preflower.lin@gmail.com> (https://github.com/preflower)",
-  "homepage": "https://reactbarcodescanner.vercel.app/",
   "license": "MIT",
-  "keywords": [],
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "eslint --fix"
-    ]
-  },
   "devDependencies": {
-    "@changesets/cli": "^2.27.5",
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "eslint": "^8.57.0",
-    "eslint-config-ted": "^3.0.2",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "typescript": "^5.4.5"
   },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "repository": "https://github.com/preflower/react-barcode-scanner",
+  "bugs": {
+    "url": "https://github.com/preflower/react-barcode-scanner/issues"
+  },
+  "homepage": "https://reactbarcodescanner.vercel.app/",
   "dependencies": {
-    "react-barcode-scanner": "^2.0.2"
+    "@preflower/barcode-detector-polyfill": "^0.9.20",
+    "tslib": "^2.6.3",
+    "webrtc-adapter": "^9.0.1"
+  },
+  "files": [
+    "lib/",
+    "esm/"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
