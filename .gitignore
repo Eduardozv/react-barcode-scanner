@@ -11,8 +11,8 @@ lerna-debug.log*
 node_modules
 
 # prod packages
-lib
-esm
+# lib
+# esm
 
 *.local
 
